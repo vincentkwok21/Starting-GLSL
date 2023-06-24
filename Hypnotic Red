@@ -1,0 +1,14 @@
+void mainImage( out vec4 fragColor, in vec2 fragCoord )
+{
+    // Normalized pixel coordinates (from 0 to 1)
+    // center is considered as (0, 0), and top right corner is (1,1)
+    vec2 uv = fragCoord/iResolution.xy * 2.0 - 1.0;
+       uv.x *= iResolution.x/iResolution.y; // makes sure the images we create seem like they are on a square canvas even when they are actually on a rectangle
+     
+    float d = length(uv);
+    d = sin(d*7.0 + iTime)/7.0; // here You can multipy the d inside sin to create concentric circles, dividing by 7 to create more gradients
+    d = abs(d);
+    d = smoothstep( 0.0, 0.1, d);
+    // Output to screen
+    fragColor = vec4(1.0, d, d, 1.0);
+}
