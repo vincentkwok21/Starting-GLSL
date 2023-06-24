@@ -1,0 +1,33 @@
+//Japan Flag
+void mainImage( out vec4 fragColor, in vec2 fragCoord )
+{
+    // Normalized pixel coordinates (from 0 to 1)
+    // center is considered as (0, 0), and top right corner is (1,1)
+    vec2 uv = fragCoord/iResolution.xy * 2.0 - 1.0;
+       uv.x *= iResolution.x/iResolution.y; // makes sure the images we create seem like they are on a square canvas even when they are actually on a rectangle
+     
+    float d = length(uv);
+    d -= 0.5;
+    //d = abs(d);
+    d = step( 0.1, d);
+    // Output to screen
+    fragColor = vec4(1.0, d, d, 1.0);
+}
+
+/*
+the following code allows the colors to be inverted
+void mainImage( out vec4 fragColor, in vec2 fragCoord )
+{
+    // Normalized pixel coordinates (from 0 to 1)
+    // center is considered as (0, 0), and top right corner is (1,1)
+    vec2 uv = fragCoord/iResolution.xy * 2.0 - 1.0;
+       uv.x *= iResolution.x/iResolution.y; // makes sure the images we create seem like they are on a square canvas even when they are actually on a rectangle
+     
+    float d = length(uv);
+    d -= 0.5;
+    //d = abs(d);
+    d = step( 0.1, d);
+    // Output to screen
+    fragColor = vec4(1.0, d, d, 1.0);
+}
+*/
